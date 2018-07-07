@@ -1,99 +1,98 @@
-(() => {
-  const getX = element => +element.getAttribute('data-x');
-  const getY = element => +element.getAttribute('data-y');
-  const getD = (element) => element.getAttribute('data-d');
-  const getT = element => +element.getAttribute('data-t');
-  const setX = (element, value) => element.setAttribute('data-x', value);
-  const setY = (element, value) => element.setAttribute('data-y', value);
-  const setD = (element, value) => element.setAttribute('data-d', value);
-  const incT = (element) => { 
-    let t = getT(element); 
-    element.setAttribute('data-t', ++t);
-    return t;
-  };
 
-  let nextDirection = 'RIGHT';
-  let directionHistory = [];
-  window.onkeydown = (e) => {
-    const map = {  32: 'IDLE', 37: 'LEFT', 38: 'UP', 39: 'RIGHT', 40: 'DOWN' };
-    nextDirection = map[e.keyCode || e.which] || nextDirection;
-  };
+const getX = element => +element.getAttribute('data-x');
+const getY = element => +element.getAttribute('data-y');
+const getD = (element) => element.getAttribute('data-d');
+const getT = element => +element.getAttribute('data-t');
+const setX = (element, value) => element.setAttribute('data-x', value);
+const setY = (element, value) => element.setAttribute('data-y', value);
+const setD = (element, value) => element.setAttribute('data-d', value);
+const incT = (element) => { 
+  let t = getT(element); 
+  element.setAttribute('data-t', ++t);
+  return t;
+};
 
-  const wrapper = document.querySelector('main');
-  const snake = appendChildHtml('<ol></ol>', wrapper);
-  const apple = appendChildHtml('<div></div>', wrapper);
-  pushToSnake(5, 5, 0, 'RIGHT');
-  moveApple();
-  const head = snake.firstChild;
-  head.addEventListener('animationiteration', onHeadMoveCompleted);
-  const length = () => head.parentNode.childElementCount;
+let nextDirection = 'RIGHT';
+let directionHistory = [];
+window.onkeydown = (e) => {
+  const map = {  32: 'IDLE', 37: 'LEFT', 38: 'UP', 39: 'RIGHT', 40: 'DOWN' };
+  nextDirection = map[e.keyCode || e.which] || nextDirection;
+};
 
-  function nextPosition(element) {
-    const mod = (n, m) => (n + m) % m;
-    let x = getX(element);
-    let y = getY(element);
-    let d = getD(element);
-    ({
-      'UP': () => y = mod(--y, 16),
-      'DOWN': () => y = mod(++y, 16),
-      'LEFT': () => x = mod(--x, 16),
-      'RIGHT': () => x = mod(++x, 16),
-      'IDLE': () => {}
-    })[d]();
-    return { x, y };
-  }
+const wrapper = document.querySelector('main');
+const snake = appendChildHtml('<ol></ol>', wrapper);
+const apple = appendChildHtml('<div></div>', wrapper);
+pushToSnake(5, 5, 0, 'RIGHT');
+moveApple();
+const head = snake.firstChild;
+head.addEventListener('animationiteration', onHeadMoveCompleted);
+const length = () => head.parentNode.childElementCount;
 
-  function onMoveCompleted(e) {
-    const element = e.srcElement;
-    const pos = nextPosition(element);
-    setX(element, pos.x);
-    setY(element, pos.y);
-    setD(element, directionHistory[getT(head) - incT(element)]);
-  }
+function nextPosition(element) {
+  const mod = (n, m) => (n + m) % m;
+  let x = getX(element);
+  let y = getY(element);
+  let d = getD(element);
+  ({
+    'UP': () => y = mod(--y, 16),
+    'DOWN': () => y = mod(++y, 16),
+    'LEFT': () => x = mod(--x, 16),
+    'RIGHT': () => x = mod(++x, 16),
+    'IDLE': () => {}
+  })[d]();
+  return { x, y };
+}
 
-  function onHeadMoveCompleted() {
-    directionHistory.unshift(nextDirection);
-    directionHistory = directionHistory.slice(0, length()+1);
-    setD(head, directionHistory[0]);
+function onMoveCompleted(e) {
+  const element = e.srcElement;
+  const pos = nextPosition(element);
+  setX(element, pos.x);
+  setY(element, pos.y);
+  setD(element, directionHistory[getT(head) - incT(element)]);
+}
 
-    if (collide(head, apple)) {
-      const tail = snake.lastChild;
-      let x = getX(tail);
-      let y = getY(tail);
-      if (getT(head) - getT(tail) === length()) {
-        x = nextPosition(tail).x;
-        y = nextPosition(tail).y;
-      }
-      pushToSnake(x, y, getT(head)-length(), 'IDLE');
-      moveApple();
+function onHeadMoveCompleted() {
+  directionHistory.unshift(nextDirection);
+  directionHistory = directionHistory.slice(0, length()+1);
+  setD(head, directionHistory[0]);
+
+  if (collide(head, apple)) {
+    const tail = snake.lastChild;
+    let x = getX(tail);
+    let y = getY(tail);
+    if (getT(head) - getT(tail) === length()) {
+      x = nextPosition(tail).x;
+      y = nextPosition(tail).y;
     }
+    pushToSnake(x, y, getT(head)-length(), 'IDLE');
+    moveApple();
   }
+}
 
-  function collide(element, other) {
-    return getX(element) == getX(other) && getY(element) == getY(other);
-  }
+function collide(element, other) {
+  return getX(element) == getX(other) && getY(element) == getY(other);
+}
 
-  function pushToSnake(x, y, t, d) {
-    const element = appendChildHtml(`
-      <li data-x='${x}' data-y='${y}' data-t='${t}' data-d='${d}'></li>
-    `, snake);
-    element.addEventListener('animationiteration', onMoveCompleted);
-  }
+function pushToSnake(x, y, t, d) {
+  const element = appendChildHtml(`
+    <li data-x='${x}' data-y='${y}' data-t='${t}' data-d='${d}'></li>
+  `, snake);
+  element.addEventListener('animationiteration', onMoveCompleted);
+}
 
-  function moveApple() {
-    setX(apple, parseInt(Math.random()*16));
-    setY(apple, parseInt(Math.random()*16));
-  }
+function moveApple() {
+  setX(apple, parseInt(Math.random()*16));
+  setY(apple, parseInt(Math.random()*16));
+}
 
-  function appendChildHtml(htmlString, parent) {
-    let element = htmlToElement(htmlString);
-    parent.appendChild(element);
-    return element;
-  }
+function appendChildHtml(htmlString, parent) {
+  let element = htmlToElement(htmlString);
+  parent.appendChild(element);
+  return element;
+}
 
-  function htmlToElement(htmlString) {
-    let template = document.createElement('template');
-    template.innerHTML = htmlString.trim();
-    return template.content.firstChild;
-  }
-});
+function htmlToElement(htmlString) {
+  let template = document.createElement('template');
+  template.innerHTML = htmlString.trim();
+  return template.content.firstChild;
+}

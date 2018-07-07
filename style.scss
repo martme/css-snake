@@ -8,8 +8,8 @@ body {
 main {
   position: relative;
   margin: 0 auto;
-  width: 100vw;
-  height: 100vw;
+  width: 100vh;
+  height: 100vh;
   background: #f9f9f9;
 
   ol {
@@ -63,17 +63,17 @@ main {
 }
 @keyframes RIGHT {
   0% { transform: translateX(0); }
-  100% { transform: translateX(calc(100vw / #{$n})); }
+  100% { transform: translateX(calc(100vh / #{$n})); }
 }
 @keyframes LEFT {
   0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-100vw / #{$n})); }
+  100% { transform: translateX(calc(-100vh / #{$n})); }
 }
 @keyframes UP {
   0% { transform: translateX(0); }
-  100% { transform: translateY(calc(-100vw / #{$n})); }
+  100% { transform: translateY(calc(-100vh / #{$n})); }
 }
 @keyframes DOWN {
   0% { transform: translateX(0); }
-  100% { transform: translateY(calc(100vw / #{$n})); }
+  100% { transform: translateY(calc(100vh / #{$n})); }
 }
