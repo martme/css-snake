@@ -1,34 +1,37 @@
 body {
   margin: 0; }
 
-#grid {
+main {
   position: relative;
   margin: 0 auto;
-  width: 100vh;
-  height: 100vh;
+  width: 100vw;
+  height: 100vw;
   background: #f9f9f9; }
-
-.sprite {
-  width: calc(100% / 16);
-  height: calc(100% / 16);
-  background-color: green;
-  position: absolute; }
-  .sprite[data-direction='NONE'] {
-    animation: PAUSE 150ms linear infinite; }
-  .sprite[data-direction='RIGHT'] {
-    animation: RIGHT 150ms linear infinite; }
-  .sprite[data-direction='LEFT'] {
-    animation: LEFT 150ms linear infinite; }
-  .sprite[data-direction='UP'] {
-    animation: UP 150ms linear infinite; }
-  .sprite[data-direction='DOWN'] {
-    animation: DOWN 150ms linear infinite; }
-
-.apple {
-  background: red;
-  border-radius: 50%; }
-  .apple[data-direction='NONE'] {
-    animation: none; }
+  main ol {
+    list-style-type: none;
+    margin: 0;
+    padding: 0; }
+    main ol li {
+      width: calc(100% / 16);
+      height: calc(100% / 16);
+      background-color: green;
+      position: absolute; }
+      main ol li[data-d='IDLE'] {
+        animation: IDLE 200ms linear infinite; }
+      main ol li[data-d='RIGHT'] {
+        animation: RIGHT 200ms linear infinite; }
+      main ol li[data-d='LEFT'] {
+        animation: LEFT 200ms linear infinite; }
+      main ol li[data-d='UP'] {
+        animation: UP 200ms linear infinite; }
+      main ol li[data-d='DOWN'] {
+        animation: DOWN 200ms linear infinite; }
+  main div {
+    width: calc(100% / 16);
+    height: calc(100% / 16);
+    position: absolute;
+    background: red;
+    border-radius: 50%; }
 
 [data-x='0'] {
   left: calc(0 * 100% / 16); }
@@ -126,34 +129,32 @@ body {
 [data-y='15'] {
   top: calc(15 * 100% / 16); }
 
-@keyframes PAUSE {
+@keyframes IDLE {
   0% {
     background: green; }
   50% {
     background: lightgreen; }
   100% {
     background: green; } }
-
 @keyframes RIGHT {
   0% {
     transform: translateX(0); }
   100% {
-    transform: translateX(calc(100vh / 16)); } }
-
+    transform: translateX(calc(100vw / 16)); } }
 @keyframes LEFT {
   0% {
     transform: translateX(0); }
   100% {
-    transform: translateX(calc(-100vh / 16)); } }
-
+    transform: translateX(calc(-100vw / 16)); } }
 @keyframes UP {
   0% {
     transform: translateX(0); }
   100% {
-    transform: translateY(calc(-100vh / 16)); } }
-
+    transform: translateY(calc(-100vw / 16)); } }
 @keyframes DOWN {
   0% {
     transform: translateX(0); }
   100% {
-    transform: translateY(calc(100vh / 16)); } }
+    transform: translateY(calc(100vw / 16)); } }
+
+/*# sourceMappingURL=style.css.map */

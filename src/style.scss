@@ -1,0 +1,79 @@
+$n: 16;
+$d: 200ms;
+
+body {
+  margin: 0;
+}
+
+main {
+  position: relative;
+  margin: 0 auto;
+  width: 100vw;
+  height: 100vw;
+  background: #f9f9f9;
+
+  ol {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      width: calc(100% / #{$n});
+      height: calc(100% / #{$n});
+      background-color: green;
+      position: absolute;
+      
+      &[data-d='IDLE'] {
+        animation: IDLE #{$d} linear infinite;
+      }
+      &[data-d='RIGHT'] {
+        animation: RIGHT #{$d} linear infinite;
+      }
+      &[data-d='LEFT'] {
+        animation: LEFT #{$d} linear infinite;
+      }
+      &[data-d='UP'] {
+        animation: UP #{$d} linear infinite;
+      }
+      &[data-d='DOWN'] {
+        animation: DOWN #{$d} linear infinite;
+      }
+    }
+  }
+  
+  div {
+    width: calc(100% / #{$n});
+    height: calc(100% / #{$n});
+    position: absolute;
+    background: red;
+    border-radius: 50%;
+  }
+} 
+
+@for $i from 0 to $n {
+  [data-x='#{$i}'] { left: calc(#{$i} * 100% / #{$n}); }
+  [data-y='#{$i}'] { top: calc(#{$i} * 100% / #{$n}); }
+}
+
+
+@keyframes IDLE {
+  0% { background: green; }
+  50% { background: lightgreen; }
+  100% { background: green; }
+}
+@keyframes RIGHT {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(100vw / #{$n})); }
+}
+@keyframes LEFT {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-100vw / #{$n})); }
+}
+@keyframes UP {
+  0% { transform: translateX(0); }
+  100% { transform: translateY(calc(-100vw / #{$n})); }
+}
+@keyframes DOWN {
+  0% { transform: translateX(0); }
+  100% { transform: translateY(calc(100vw / #{$n})); }
+}
