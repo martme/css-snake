@@ -69,6 +69,7 @@ function onHeadMoveCompleted() {
     }
     pushToSnake(x, y, getT(head)-length(), 'IDLE');
     moveApple();
+    wrapper.setAttribute('data-pts', +wrapper.getAttribute('data-pts') + 1);
   }
 }
 

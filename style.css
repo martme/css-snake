@@ -7,6 +7,32 @@ main {
   width: 100vw;
   height: 100vw;
   background: #f9f9f9; }
+  main p {
+    width: calc(100% / 16);
+    height: calc(100% / 16);
+    position: absolute;
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.2); }
+  main[data-pts^='0'] .a, main[data-pts^='0'] .b, main[data-pts^='0'] .c, main[data-pts^='0'] .d, main[data-pts^='0'] .e, main[data-pts^='0'] .f {
+    visibility: visible; }
+  main[data-pts^='1'] .b, main[data-pts^='1'] .c {
+    visibility: visible; }
+  main[data-pts^='2'] .a, main[data-pts^='2'] .b, main[data-pts^='2'] .g, main[data-pts^='2'] .e, main[data-pts^='2'] .d {
+    visibility: visible; }
+  main[data-pts^='3'] .a, main[data-pts^='3'] .b, main[data-pts^='3'] .g, main[data-pts^='3'] .c, main[data-pts^='3'] .d {
+    visibility: visible; }
+  main[data-pts^='4'] .f, main[data-pts^='4'] .g, main[data-pts^='4'] .b, main[data-pts^='4'] .c {
+    visibility: visible; }
+  main[data-pts^='5'] .a, main[data-pts^='5'] .f, main[data-pts^='5'] .g, main[data-pts^='5'] .c, main[data-pts^='5'] .d {
+    visibility: visible; }
+  main[data-pts^='6'] .a, main[data-pts^='6'] .f, main[data-pts^='6'] .g, main[data-pts^='6'] .e, main[data-pts^='6'] .d, main[data-pts^='6'] .c {
+    visibility: visible; }
+  main[data-pts^='7'] .a, main[data-pts^='7'] .b, main[data-pts^='7'] .c {
+    visibility: visible; }
+  main[data-pts^='8'] p {
+    visibility: visible; }
+  main[data-pts^='9'] .g, main[data-pts^='9'] .f, main[data-pts^='9'] .a, main[data-pts^='9'] .b, main[data-pts^='9'] .c, main[data-pts^='9'] .d {
+    visibility: visible; }
   main ol {
     list-style-type: none;
     margin: 0;

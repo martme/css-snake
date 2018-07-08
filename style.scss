@@ -13,6 +13,25 @@ main {
   height: #{$w};
   background: #f9f9f9;
 
+  p {
+    width: calc(100% / #{$n});
+    height: calc(100% / #{$n});
+    position: absolute;
+    visibility: hidden;
+    background-color: rgba(0,0,0,0.2);
+  }
+
+  &[data-pts^='0'] { .a, .b, .c, .d, .e, .f { visibility: visible; } }
+  &[data-pts^='1'] { .b, .c { visibility: visible; } }
+  &[data-pts^='2'] { .a, .b, .g, .e, .d { visibility: visible; } }
+  &[data-pts^='3'] { .a, .b, .g, .c, .d { visibility: visible; } }
+  &[data-pts^='4'] { .f, .g, .b, .c { visibility: visible; } }
+  &[data-pts^='5'] { .a, .f, .g, .c, .d { visibility: visible; } }
+  &[data-pts^='6'] { .a, .f, .g, .e, .d, .c { visibility: visible; } }
+  &[data-pts^='7'] { .a, .b, .c { visibility: visible; } }
+  &[data-pts^='8'] { p { visibility: visible; } }
+  &[data-pts^='9'] { .g, .f, .a, .b, .c, .d { visibility: visible; } }
+
   ol {
     list-style-type: none;
     margin: 0;
