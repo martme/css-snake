@@ -1,5 +1,6 @@
 $n: 16;
 $d: 200ms;
+$w: 100vw;
 
 body {
   margin: 0;
@@ -8,8 +9,8 @@ body {
 main {
   position: relative;
   margin: 0 auto;
-  width: 100vh;
-  height: 100vh;
+  width: #{$w};
+  height: #{$w};
   background: #f9f9f9;
 
   ol {
@@ -56,11 +57,11 @@ main {
     }
 } 
 
+
 @for $i from 0 to $n {
   [data-x='#{$i}'] { left: calc(#{$i} * 100% / #{$n}); }
   [data-y='#{$i}'] { top: calc(#{$i} * 100% / #{$n}); }
 }
-
 
 @keyframes IDLE {
   0% { background: green; }
@@ -69,17 +70,43 @@ main {
 }
 @keyframes RIGHT {
   0% { transform: translateX(0); }
-  100% { transform: translateX(calc(100vh / #{$n})); }
+  100% { transform: translateX(calc(#{$w} / #{$n})); }
 }
 @keyframes LEFT {
   0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-100vh / #{$n})); }
+  100% { transform: translateX(calc(-#{$w} / #{$n})); }
 }
 @keyframes UP {
   0% { transform: translateX(0); }
-  100% { transform: translateY(calc(-100vh / #{$n})); }
+  100% { transform: translateY(calc(-#{$w} / #{$n})); }
 }
 @keyframes DOWN {
   0% { transform: translateX(0); }
-  100% { transform: translateY(calc(100vh / #{$n})); }
+  100% { transform: translateY(calc(#{$w} / #{$n})); }
+}
+
+
+@media screen and (min-width: 600px) {
+  $w: 600px;
+  main {
+    width: #{$w};
+    height: #{$w};
+  }
+
+  @keyframes RIGHT {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(#{$w} / #{$n})); }
+  }
+  @keyframes LEFT {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-#{$w} / #{$n})); }
+  }
+  @keyframes UP {
+    0% { transform: translateX(0); }
+    100% { transform: translateY(calc(-#{$w} / #{$n})); }
+  }
+  @keyframes DOWN {
+    0% { transform: translateX(0); }
+    100% { transform: translateY(calc(#{$w} / #{$n})); }
+  }
 }

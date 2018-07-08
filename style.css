@@ -4,8 +4,8 @@ body {
 main {
   position: relative;
   margin: 0 auto;
-  width: 100vh;
-  height: 100vh;
+  width: 100vw;
+  height: 100vw;
   background: #f9f9f9; }
   main ol {
     list-style-type: none;
@@ -143,21 +143,46 @@ main {
   0% {
     transform: translateX(0); }
   100% {
-    transform: translateX(calc(100vh / 16)); } }
+    transform: translateX(calc(100vw / 16)); } }
 @keyframes LEFT {
   0% {
     transform: translateX(0); }
   100% {
-    transform: translateX(calc(-100vh / 16)); } }
+    transform: translateX(calc(-100vw / 16)); } }
 @keyframes UP {
   0% {
     transform: translateX(0); }
   100% {
-    transform: translateY(calc(-100vh / 16)); } }
+    transform: translateY(calc(-100vw / 16)); } }
 @keyframes DOWN {
   0% {
     transform: translateX(0); }
   100% {
-    transform: translateY(calc(100vh / 16)); } }
+    transform: translateY(calc(100vw / 16)); } }
+@media screen and (min-width: 600px) {
+  main {
+    width: 600px;
+    height: 600px; }
+
+  @keyframes RIGHT {
+    0% {
+      transform: translateX(0); }
+    100% {
+      transform: translateX(calc(600px / 16)); } }
+  @keyframes LEFT {
+    0% {
+      transform: translateX(0); }
+    100% {
+      transform: translateX(calc(-600px / 16)); } }
+  @keyframes UP {
+    0% {
+      transform: translateX(0); }
+    100% {
+      transform: translateY(calc(-600px / 16)); } }
+  @keyframes DOWN {
+    0% {
+      transform: translateX(0); }
+    100% {
+      transform: translateY(calc(600px / 16)); } } }
 
 /*# sourceMappingURL=style.css.map */
