@@ -41,13 +41,19 @@ main {
     }
   }
   
-  div {
+  div, button {
     width: calc(100% / #{$n});
     height: calc(100% / #{$n});
     position: absolute;
-    background: red;
     border-radius: 50%;
   }
+
+  div {
+      background: red;
+    }
+  button {
+      background: #aaa;
+    }
 } 
 
 @for $i from 0 to $n {

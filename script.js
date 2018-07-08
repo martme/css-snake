@@ -14,6 +14,10 @@ const incT = (element) => {
 
 let nextDirection = 'RIGHT';
 let directionHistory = [];
+document.querySelectorAll('button').forEach(element => {
+  element.addEventListener('click', () => nextDirection = getD(element));
+  element.addEventListener('touchstart', () => nextDirection = getD(element));
+});
 window.onkeydown = (e) => {
   const map = {  32: 'IDLE', 37: 'LEFT', 38: 'UP', 39: 'RIGHT', 40: 'DOWN' };
   nextDirection = map[e.keyCode || e.which] || nextDirection;
@@ -21,9 +25,8 @@ window.onkeydown = (e) => {
 
 const wrapper = document.querySelector('main');
 const snake = appendChildHtml('<ol></ol>', wrapper);
-const apple = appendChildHtml('<div></div>', wrapper);
+const apple = appendChildHtml(`<div data-x=${4} data-y=${3}></div>`, wrapper);
 pushToSnake(5, 5, 0, 'RIGHT');
-moveApple();
 const head = snake.firstChild;
 head.addEventListener('animationiteration', onHeadMoveCompleted);
 const length = () => head.parentNode.childElementCount;

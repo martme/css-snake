@@ -26,12 +26,15 @@ main {
         animation: UP 200ms linear infinite; }
       main ol li[data-d='DOWN'] {
         animation: DOWN 200ms linear infinite; }
-  main div {
+  main div, main button {
     width: calc(100% / 16);
     height: calc(100% / 16);
     position: absolute;
-    background: red;
     border-radius: 50%; }
+  main div {
+    background: red; }
+  main button {
+    background: #aaa; }
 
 [data-x='0'] {
   left: calc(0 * 100% / 16); }
